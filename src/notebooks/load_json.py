@@ -31,7 +31,7 @@ def clean_data(data):
             #For each review, slice off the comments
             reviewer_scores = reviewer[:17]
             #Also, divide into subsets matched to questions
-            reviewer_scores = [reviewer_scores[:7], reviewer_scores[7:11], reviewer_scores[11:14], reviewer_scores[14:]]
+            reviewer_scores = [reviewer_scores[:6], reviewer_scores[6:10], reviewer_scores[10:13], reviewer_scores[13:]]
             #Turn strings into ints
             for q in range(len(reviewer_scores)):
                 reviewer_scores[q] = list(map(int, reviewer_scores[q]))
