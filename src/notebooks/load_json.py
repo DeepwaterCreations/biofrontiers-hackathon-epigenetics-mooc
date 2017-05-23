@@ -10,7 +10,7 @@ def load_data(data_filename):
         data = json.load(data_file)
     return data
 
-def clean_data(data, q_num):
+def clean_data(data, q_num, rows_count=-1):
     """Strip garbage from data and reorganize
 
     Output: A list of sublists, where each sublist is a student's answer to one question followed by
@@ -19,8 +19,12 @@ def clean_data(data, q_num):
     question_labels = ['Q1', 'Q2', 'Q3', 'Q4']
     questions = [question_labels[q_num-1]]
     cleaned_data = []
+
+    if rows_count == -1:
+        rows_count = len(data.keys())
+
     #Iterate over student ids
-    for student_id in data.keys():
+    for student_id in list(data.keys())[:rows_count]:
         scores = []
         if 'answers' not in data[student_id] or \
             'evaluations' not in data[student_id] or \
@@ -81,12 +85,12 @@ def normalize_scores(y):
     max_val = max(y)
     return [y_val/max_val for y_val in y]
 
-def get_features(filename, normalize_y = False, q_num=1):
+def get_features(filename, normalize_y = False, q_num=1, rows_count=-1):
     """Return (x, y) where x is a list of answers to question q_num, and y is a list of sums over the averaged score array
     for that answer
     """
     data = load_data(filename)
-    cleaned_data = clean_data(data, q_num)
+    cleaned_data = clean_data(data, q_num, rows_count)
     x = [d[0] for d in cleaned_data]
     y = [sum(d[1:]) for d in cleaned_data]
     if normalize_y:
