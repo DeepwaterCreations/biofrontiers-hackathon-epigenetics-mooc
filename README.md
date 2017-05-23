@@ -11,18 +11,23 @@ This pipeline extracts each student’s answer and associated scores from the HT
 # Table of contents:
  
 doc
- ..* Project notes as of 5/23/17 lunchtime
+
+* Project notes as of 5/23/17 lunchtime
  
 resources
- ..* YAML file for conda ML/NLP environment
+
+* YAML file for conda ML/NLP environment
+
+src/notebooks	
  
- src/notebooks	
-..* Epigenetics-Answer-Classifier.ipynb
-..* load_json.py
+* Epigenetics-Answer-Classifier.ipynb
+
+* load_json.py
 
 # Installation
 
 put installation info here
+
 dependencies here
 
 
