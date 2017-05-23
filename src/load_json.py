@@ -1,6 +1,7 @@
 #!/usr/env/bin python3
 import sys
 import json
+from html.parser import HTMLParser
 
 import numpy as np
 
@@ -43,10 +44,35 @@ def clean_data(data):
         answers = data[student_id]['answers']
         for i, q in enumerate(['Q1', 'Q2', 'Q3', 'Q4']):
             if q in answers:
-                cleaned_data.append([answers[q]] + scores[i])
+                answer = remove_garbage(answers[q])
+                cleaned_data.append([answer] + scores[i])
             
     return cleaned_data
 
+class HTMLStripper(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.reset()
+        self.fed = []
+
+    def handle_data(self, d):
+        self.fed.append(d)
+
+    def get_data(self):
+        return "".join(self.fed)
+
+def remove_garbage(s):
+    """Strip html and unicode artifacts from string s"""
+    #HTML
+    html_stripper = HTMLStripper()
+    html_stripper.feed(s)
+    s = html_stripper.get_data()
+
+    #Unicode and unparsed newlines
+    s = bytes(s, "utf-8").decode("ascii", "ignore")
+    s = s.replace('\n', ' ')
+
+    return s
 
 if __name__ == "__main__":
     if len(sys.argv) < 1:
@@ -55,3 +81,4 @@ if __name__ == "__main__":
 
     data = load_data(sys.argv[1])
     cleaned_data = clean_data(data)
+    print(cleaned_data)
