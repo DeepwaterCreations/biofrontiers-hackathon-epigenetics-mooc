@@ -1,0 +1,283 @@
+Epigenetics MOOC Notes
+BioFrontiers Hackathon, May 22-24, 2017
+
+Author: Bridget Menasche
+Last update: 2017-05-22
+
+
+Data set	2
+From Slack channel	2
+From our initial discussion	2
+Data structure	3
+Structure:	3
+Details	3
+Questions	3
+Question points	4
+Question 1	4
+Question 2	4
+Question 3	4
+Question 4	4
+Ways to use this data?	5
+Project goals and main research questions	5
+Data processing	5
+Concepts	5
+Workflow	6
+Project steps	8
+Natural language processing methods	8
+Punch cards	9
+Completed tasks	9
+Todo	9
+
+Data set
+From Slack channel
+Briefly, we are going to use the materials from the Coursera course “Epigenetic Control of Gene Expression” https://www.coursera.org/learn/epigenetics by the University of Melbourne to assess effective human learning of highly complex and abstract scientific content. I will share my course materials from 2 years ago in an archive. Please, don’t share them beyond this team. Alternatively, you can sign up on Coursera _for free_. All the materials except the assignments are accessible.
+
+The main dataset, which was kindly shared with us by U of Melbourne after a year of negotiation and ethics review, will be shared separately at the hackathon. It consists of the final writing assignment (Week 7) for three editions of the course and is structured as follows:
+    • Two papers as _ground-truth_ reading
+    • Very detailed questions on the reading, complete with an exhaustive list of sub-topics that have to be addressed
+    • Student answers (for about 7,000 students, which is _a lot_ for a BioNLP dataset)
+    • One-line precise answers to the questions by the expert staff, and full guidelines for the peer reviewers
+    • 4+ reviews for each answer in the form of a score of 0, 1, or 2.
+    • Reviewer comments, if any
+
+From our initial discussion
+Dataset is the last assignment: students read two additional papers, a scientific paper about epigenetic factors in cancer, the other is a broad, economist style for the public article. Each student has to answer certain questions in the writing assignment; these are open-ended paragraphs of text. Questions are very specific and include info about what should be mentioned in the answers. After this ends, each student has to peer review four other people’s answers. Students get the official answers to the questions and a rubric for reviewing.
+0, doesn’t answer the question
+1, answers the question but it’s not very clear
+2, answers the question well
+And there’s space for students to add comments once they do the grades.
+
+We need to create a classifier that can handle these three labels.
+
+The dataset contains writing assignment data from the first 3 instances of the course, from 7000 students that have completed the writing assignment - and though this is a small fraction of the number of people that took the course, it’s still a big dataset for the kind of analysis. Interesting because there are several levels of feedback that immediately suggest supervised learning and training of a classifier. That’s the main thing we want to do and the achievable thing in this project.
+Data structure
+Data we’re starting with, the assignment answers, does not include the background material used in the course, though since we have that can potentially include background data later.
+Each question has multiple points. The student writes an answer in sentence/paragraphs. But it’s not the paragraph as a whole that gets scored - individual points within the paragraphs are separately evaluated by peer reviewers who are provided with the correct answer for that individual point.
+
+See the answers and evaluation pdf document for example answers and evaluations of those answers. 
+In order to create and train a classifier need to pair questions, answers, and scores.
+
+Structure:
+Each question has subquestions/guidelines (“you should mention this fact as part of your answer”). 
+For each one of those subquestions, we have the correct answer, the student’s answer, and about 4 separate reviews for the answer to each subquestion. 
+Not everyone has the same number of reviews, there should be some coverage of everyone from peer review however.
+Each of the subquestions will then have an average score associated with it
+Note that though this structure exists conceptually, it doesn’t exist explicitly within the data. A given question has defined subquestions, defined individual answers, and defined individual scores. But the student input text is one block - a paragraph or set of paragraphs. 
+Seems like one challenge will be breaking up
+
+Details
+Questions
+There are 4 (four) questions:
+Describe how DNA methylation is altered in cancer. In your answer include the following points 
+Describe how disruption of imprinting can contribute to cancer, using the example of the H19/Igf2 cluster. In your answer include the following points 
+The Economist article “Cancer’s epicentre (http://www.economist.com/node/21552168)” describes several drugs that affect epigenetic processes. Explain how Decitabine may be used to treat cancer, with reference to effects on the epigenome. In your answer include the following points
+Dr Stephen Baylin speculates in the Economist article that "epigenetic drugs altered the tumour cells in some lasting way that made them more susceptible to standard chemotherapy." How can drugs that alter DNA methylation have effects that last beyond the period of drug treatment? Discuss whether there are any periods of development when you would avoid treating patients with such drugs. In your answer include the following points 
+
+
+Question points
+Question 1
+“Describe how DNA methylation is altered in cancer. In your answer include the following points:”
+Describe the normal function of DNA methylation at CpG islands.
+Describe how DNA methylation of CpG islands is disrupted in cancer.
+Explain how disruption of DNA methylation at CpG islands contributes to cancer.
+Describe the normal function of DNA methylation in intergenic regions and repetitive elements. 
+Describe how DNA methylation in intergenic regions and repetitive elements is disrupted in cancer. 
+Explain how disruption of DNA methylation in intergenic regions and repetitive elements contributes to cancer. 
+
+Question 2
+Describe how disruption of imprinting can contribute to cancer, using the example of the H19/Igf2 cluster. In your answer include the following points
+
+Describe the methylation pattern of the paternal allele and how this determines Igf2 expression status.
+Describe the methylation pattern of the maternal allele and how this determines Igf2 expression status.					
+Describe how imprinting at the H19/Igf2 cluster is disrupted in Wilm’s tumour. 
+Explain how disrupting imprinting at the H19/Igf2 cluster contributes to cancer. 
+
+Question 3
+The Economist article “Cancer’s epicentre (http://www.economist.com/node/21552168)” describes several drugs that affect epigenetic processes. Explain how Decitabine may be used to treat cancer, with reference to effects on the epigenome. In your answer include the following points 
+
+Identify the class of epigenetic inhibitors that Decitabine belongs to. 
+Describe the impact of Decitabine on DNA methylation.
+Describe how Decitabine can have an anti-tumour effect. 
+
+Question 4
+Dr Stephen Baylin speculates in the Economist article that "epigenetic drugs altered the tumour cells in some lasting way that made them more susceptible to standard chemotherapy." How can drugs that alter DNA methylation have effects that last beyond the period of drug treatment? Discuss whether there are any periods of development when you would avoid treating patients with such drugs. In your answer include the following points 
+
+Describe how altering DNA methylation can have enduring effects on the epigenome. 
+Define what is meant by a sensitive period.
+Identify sensitive periods of development.
+Explain why treating patients during sensitive periods would be inadvisable. 
+
+
+
+Ways to use this data?
+Can generate an overall score for an answer based on the score stuff in the data - the peer review scores correspond to individual points, but we can add those up within a peer review and then average them to get an aggregate score for each answer.
+We can use the defined answers for each subquestion as features within the input data, the text paragraph student answer.
+Bag of words approach: will have a distribution of all the important words in the paragraph (not and, to, etc). Will convert the text paragraph into a vector. Then this serves as one feature.
+If we’re able to expand on the bag of words approach, is it possible to look for which words occur together in a sentence?
+
+Project goals and main research questions
+
+
+Question: how are we going to assess effectiveness of learning? We have training data of good answers/bad answers. Make it clear when writing the final version if this training data is from student scores only, or from instructor reading/scores of answers. In addition, while our project will probably depend just on the course data, we should address in the intro and discussion how the assignment structure, the evaluation structure, and the scores, connect to broader ideas about effectiveness of learning. 
+
+Goal is to create a piece of software that grades answers.
+Later work, not included here, will include epigenetics background info, and other models.
+
+
+
+Data processing 
+Concepts
+Anything that’s trained to parse scientific publications is not appropriate for analyzing this data set since it comes from a MOOC - these are answers written by the “general public”, so even very good answers that represent understanding, that are correct, will be written in a different style than standard scientific language.
+
+Going to base the training features on shallow semantics: sentence level ngram models/sentence level data. Narrative features are in the middle and generally not included in shallow semantics. Syntactic analysis included in shallow semantics (parts of speech, parsing a single sentence, etc). Doesn’t come close to human-term understanding of a sentence … it is statistical analysis of a text. Deep semantics relies on more elaborate models of thinking and learning or of knowledge representation. Neural networks can give you a great classifier and you have know idea why it’s great. Trade-off or dichotomy between inference and prediction. Neural networks can “replicate but not explain” according to Adolfo.
+
+Can subject the text to preprocessing to generate certain features - a neural network would need to be very detailed to extract features itself, and that would take too much time and effort. So we’ll do this partially “by hand”?
+Ontological annotation is outside of our scope (look this up so I can explain it in the paper)
+
+The input is up to us: do we make our own model of the knowledge that the students are supposed to internalize and use to answer the questions?
+
+Not trivial to take scientific articles and create computable knowledge out of that (is that something a more complete version of this project would want to do?). So here the goal is not to go from the papers provided as input in the course to
+
+Set up several instances of tensor flow and compare them - this is a type of neural network - want something that’s easily accessible and that we can do iterations with, since iterations are important for this kind of project.
+(not sure what tensor flow is, look it up so I can explain that in the paper)
+
+
+Workflow
+
+Main questions we’re working with right now to organize the project:
+How do we parse the input or code or structure the input paragraph data so that it can be analyzed
+
+Possible order of operations:
+Pre-process data
+Extract features from text
+Decide on the scoring based on the features that we chose/that the program chose
+Design and train neural network
+Iterate over these operations again to perhaps add features that we want to look at
+
+
+Goals for today:
+Pre-process data
+Extract features from text
+(what is meaningful? Working from words or from engrams? Maybe we’re going to start with words to get the first version working)
+
+Probably going to use question 1 as a prototype for the
+
+Can we develop a classifier than can extract from the student answer text evaluative features to tell whether this is a good answer or not?
+
+
+(One thought, not discussed in the group: how to sentence structures/writing skills correlate with understanding?)
+
+(Another thing discussed: some of the answers read like they were written in another language and then run through google translate, and that can maybe create issues in accurate scoring. However the assignment and scoring instructions include this:						
+“Please remember that not all students come from an English speaking background. Focus on whether the relevant points have been clearly stated and not on the quality and sophistication of the language.”)
+
+May need to start with the data as a block from all 3 years, then break it up in the future. Consistency between the questions isn’t an issue however - the course is the same over those years.
+
+Validation: want to condense the official answers into a paragraph and then run that through the classifier to make sure it scores them as correct.
+
+Data: JSON
+Mostly processed. Need to remove HTML code for paragraphs breaks for example.
+Format:
+
+Format we might want it in:
+Answer vector (bag of words and/or phrases)
+Evaluation vector (scalar; for question 1, from 0-12)
+
+
+The answer vector might be extremely long … each word or phrase we’re looking for can be a position in the vector, and can be represented as a 1 for presence of that word or 0 as absence of the word. Can also include numbers of how many times this word shows up. Again, this would be a single feature, and we can just train the classifier on that feature. If using counts of how many times each word shows up, will need to normalize for total word count (or some other metric of length) for the answer.
+
+Maybe we’ll start with the official answer to create the desired answer vector
+
+Once this is done we’ll think about other features that we can use and add to the model. Some will be predictive, others not, and we can do analysis of which of those are useful.
+
+Data input into neural network: needs to be in csv format, where each line represents an answer, and contains the vector representing a feature for that answer along with the aggregated score for that answer.
+Potential data features
+Bag of words: incidence only
+Bag of words: word counts, normalized by total number of words in that answer
+Triples: subject, verb, object of each sentence
+Answer length: total number of words
+Answer length: total number of sentences
+
+Note: features that reflect the length of the answer could serve as useful controls. The length of an answer likely correlates with the evaluation of the answer, but length does not necessarily reflect understanding or cause an answer to be correct. It might be necessary to somehow control for answer length in order to remove that as a factor when doing deeper analysis of this data. For instance, it might be useful to sort the data into length categories ( < x words, x-y words, > y words) and then re-run the classifier within those categories to make sure it is still predictive. This could be done for the training step, the evaluation step, or both.
+Project steps
+
+Find JSON schema (structure of data)
+Extract question 1 answers and evals from JSON, create aggregate/average evals for each answer
+Generate vector space from all the text in the student answers - Q1 answer corpus (note: we’ll want to use the correct answer provided in the key as a model vector somehow)
+Vectorize answers with aggregate stores (incidence vectors)
+Split data into sets: train, test, validation
+Machine learning setup and pipeline
+Train and evaluate
+
+Questions to think about:
+How do deal with words that are not in the official answer? Can have good answers that don’t use the same words. We were originally thinking about generating the vector space from just the ideal answers. But instead going to generate it from the corpus of words to prevent this problem. Note that these vectors will be HUGE and variable.
+
+Can use NLTK python library for removing “filler” words (important for grammar, not the keywords we want to look at in the answer). Can also use spaCy for this.
+
+
+Can use Python JSON to create dictionary of the words in the dataset. Dylan’s suggestion. If you know how to do this, add notes about it.
+
+At some point, may want to generate different representations of the data. For different features, want different chunks of the text. Class of features that is a bag of words. Others can take into account sentence-level features.
+
+
+Natural language processing methods
+spaCy
+Natural language processing in Python: spaCy
+https://spacy.io/
+
+Spacy features we can use during this hackathon in bold
+Non-destructive tokenization
+Syntax-driven sentence segmentation
+Pre-trained word vectors
+Part-of-speech tagging
+Named entity recognition
+Labelled dependency parsing
+Convenient string-to-int mapping
+Export to numpy data arrays
+GIL-free multi-threading
+Efficient binary serialization
+Easy deep learning integration
+Statistical models for English and German
+State-of-the-art speed
+Robust, rigorously evaluated accuracy
+spaCy resources
+Source for spacy models:
+https://github.com/explosion/spacy-models/blob/master/README.md
+
+Tutorials:
+https://spacy.io/docs/usage/tutorials
+
+Spacy github page with example scripts: Quite straightforward, work from these
+https://github.com/explosion/spaCy/tree/master/examples
+
+Jupyter notebooks for spacy intros:
+https://github.com/explosion/spacy-notebooks
+
+After working with the default models, working with entity recognition might be useful. Good for differentiating between keywords we care about that are “simple” (CpG island) or “conceptual” (regulation).
+https://spacy.io/docs/usage/entity-recognition
+
+For after this hackathon: deep learning
+https://spacy.io/docs/usage/deep-learning
+https://explosion.ai/blog/deep-learning-formula-nlp
+Triples would be great for distilling sentences and looking at sentence-level features of the answer data. Triples distills a sentence to subject, verb, object. Because it can reflect both cause and effect and the overall gist of the sentence it will likely reveal differences between answers that contain the right words but not the right concepts, and answers that link together concepts correctly and score highly.
+
+About triples:
+http://blog.cytora.com/insights/2016/11/21/extracting-information-from-natural-language-using-triples
+
+Brief example on how to ask spaCy for triples in this tutorial:
+https://nicschrading.com/project/Intro-to-NLP-with-spaCy/
+
+Punch cards
+Completed tasks
+Project outline presentation
+
+Todo
+5/22/17 To do list:
+Find host for Jupyter notebook
+Organize gitlab repository
+Share dataset privately
+Generate dummy dataset for gitlab
+Extract JSON into python dictionary
+Clean unicode (html to JSON can have artifacts we want to get rid of)
+NLTK, SCI-LEARN
+
+Tomorrow: generating more possible features
