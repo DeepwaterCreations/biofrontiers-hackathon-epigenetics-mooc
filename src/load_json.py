@@ -16,6 +16,8 @@ def clean_data(data):
     Output: A list of sublists, where each sublist is a student's answer to one question followed by
     the averages of the scores given to that question by the student's reviewers.
     """
+    # questions = ['Q1', 'Q2', 'Q3', 'Q4']
+    questions = ['Q1']
     cleaned_data = []
     #Iterate over student ids
     for student_id in data.keys():
@@ -42,7 +44,7 @@ def clean_data(data):
 
         #Extract answers and match with combined subsets
         answers = data[student_id]['answers']
-        for i, q in enumerate(['Q1', 'Q2', 'Q3', 'Q4']):
+        for i, q in enumerate(questions):
             if q in answers:
                 answer = remove_garbage(answers[q])
                 cleaned_data.append([answer] + scores[i])
@@ -74,11 +76,21 @@ def remove_garbage(s):
 
     return s
 
+def get_features(filename):
+    """Return (x, y) where x is a list of answers to Q1, and y is a list of sums over the averaged score array
+    for that answer
+    """
+    data = load_data(filename)
+    cleaned_data = clean_data(data)
+    x = [d[0] for d in cleaned_data]
+    y = [sum(d[1:]) for d in cleaned_data]
+    return (x, y)
+
 if __name__ == "__main__":
     if len(sys.argv) < 1:
         print("USAGE: load_json.py filename")
         sys.exit()
 
-    data = load_data(sys.argv[1])
-    cleaned_data = clean_data(data)
-    print(cleaned_data)
+    x, y = get_features(sys.argv[1])
+    for row in zip(x, y):
+        print(row)
