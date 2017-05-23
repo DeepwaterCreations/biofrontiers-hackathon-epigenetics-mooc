@@ -76,7 +76,12 @@ def remove_garbage(s):
 
     return s
 
-def get_features(filename):
+def normalize_scores(y):
+    """Return a list of normalized scores between 0.0 and 1.0"""
+    max_val = max(y)
+    return [y_val/max_val for y_val in y]
+
+def get_features(filename, normalize_y = False):
     """Return (x, y) where x is a list of answers to Q1, and y is a list of sums over the averaged score array
     for that answer
     """
@@ -84,6 +89,8 @@ def get_features(filename):
     cleaned_data = clean_data(data)
     x = [d[0] for d in cleaned_data]
     y = [sum(d[1:]) for d in cleaned_data]
+    if normalize_y:
+        y = normalize_scores(y)
     return (x, y)
 
 if __name__ == "__main__":
