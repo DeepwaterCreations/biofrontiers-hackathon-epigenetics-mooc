@@ -83,7 +83,8 @@ def remove_garbage(s):
 def normalize_scores(y):
     """Return a list of normalized scores between 0.0 and 1.0"""
     max_val = max(y)
-    return [y_val/max_val for y_val in y]
+    min_val = min(y)
+    return [(y_val-min_val)/(max_val-min_val) for y_val in y]
 
 def get_features(filename, normalize_y = False, q_num=1, rows_count=-1):
     """Return (x, y) where x is a list of answers to question q_num, and y is a list of sums over the averaged score array
