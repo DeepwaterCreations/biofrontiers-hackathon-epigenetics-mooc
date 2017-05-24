@@ -6,7 +6,30 @@ This pipeline analyzes the effectiveness of human learning in a highly abstract 
 
 This pipeline extracts each student’s answer and associated scores from the HTML data from the coursera website for natural language processing and neural network analysis.
 
+(Put illustration here)
 
+# Installation
+
+put installation info here
+
+## Dependencies
+python 3
+
+sys
+
+json
+
+html.parser
+
+pandas
+
+numpy
+
+tensorflow
+
+tflearn
+
+spacy
 
 # Table of contents:
  
@@ -24,13 +47,9 @@ src/notebooks
 
 * load_json.py
 
-# Installation
 
-put installation info here
-
-dependencies here
 
 
 # To-do:
-Still need to determine final location of git and materials
+Final git repo location TBD
  
