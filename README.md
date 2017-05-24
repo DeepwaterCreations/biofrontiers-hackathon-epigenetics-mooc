@@ -14,23 +14,23 @@ https://biof-git.colorado.edu/hackathon/epigenetics_mooc/blob/ada932bd749486f035
 put installation info here
 
 ## Dependencies
-python 3
+*python 3+
 
-sys
+**sys
 
-json
+**json
 
-html.parser
+**html.parser
 
-pandas
+**pandas
 
-numpy
+**numpy
 
-tensorflow
+**tensorflow
 
-tflearn
+**tflearn
 
-spacy
+**spacy
 
 # Table of contents:
  
