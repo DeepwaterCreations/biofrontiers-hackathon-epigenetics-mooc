@@ -14,13 +14,21 @@ put installation info here
 
 ## Dependencies
 python 3
+
 sys
+
 json
+
 html.parser
+
 pandas
+
 numpy
+
 tensorflow
+
 tflearn
+
 spacy
 
 # Table of contents:
