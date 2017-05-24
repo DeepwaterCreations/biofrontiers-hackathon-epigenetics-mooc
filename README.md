@@ -10,11 +10,11 @@ This pipeline extracts each student’s answer and associated scores from the HT
 ![pipeline](https://biof-git.colorado.edu/hackathon/epigenetics_mooc/blob/ada932bd749486f035e9f8fce19177d46642ac0b/Epigenetics_MOOC_5_24_17_pipeline.png)
 
 
-# What it does
+## What it does
 
 placeholder
 
-# How it works
+## How it works
 
 placeholder
 
