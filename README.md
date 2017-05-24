@@ -18,6 +18,18 @@ placeholder
 
 placeholder
 
+## Required input data
+
+* Student answer and score data in JSON format
+
+OR
+
+* Student answer and score data in HTML format
+
+## Optional input data
+
+* outside vocabulary or word corpus
+
 # Installation
 
 put installation info here
@@ -35,17 +47,6 @@ put installation info here
 
 * spacy
 
-## Required input data
-
-* Student answer and score data in JSON format
-
-OR
-
-* Student answer and score data in HTML format
-
-## Optional input data
-
-* outside vocabulary or word corpus
 
 # Table of contents:
 
