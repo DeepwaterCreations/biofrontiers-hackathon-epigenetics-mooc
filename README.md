@@ -1,4 +1,5 @@
-# Epigenetics MOOC
+# Python pipeline for evaluation of MOOC student answers
+## Biomedical natural language processing (BioNLP) and neural network analysis
 
 Writing assignments in Massive Open Online Courses (MOOCs) don't just provide students with grades: they contain data useful for assessing student learning.
 
@@ -6,47 +7,60 @@ This pipeline analyzes the effectiveness of human learning in a highly abstract 
 
 This pipeline extracts each student’s answer and associated scores from the HTML data from the coursera website for natural language processing and neural network analysis.
 
-(Put illustration here)
+![pipeline](https://biof-git.colorado.edu/hackathon/epigenetics_mooc/blob/ada932bd749486f035e9f8fce19177d46642ac0b/Epigenetics_MOOC_5_24_17_pipeline.png)
+
+
+## What it does
+
+placeholder
+
+## How it works
+
+placeholder
+
+## Required input data
+
+* Student answer and score data in JSON format (start with load_json.py)
+
+OR
+
+* Student answer and score data in HTML format (processing script for HTML data available upon request)
+
+## Optional input data
+
+* outside vocabulary or word corpus
 
 # Installation
 
 put installation info here
 
 ## Dependencies
-python 3
+* python 3+
 
-sys
+* pandas
 
-json
+* numpy
 
-html.parser
+* tensorflow
 
-pandas
+* tflearn
 
-numpy
+* spacy
 
-tensorflow
-
-tflearn
-
-spacy
 
 # Table of contents:
- 
-doc
 
-* Project notes as of 5/23/17 lunchtime
- 
 resources
 
-* YAML file for conda ML/NLP environment
+* conda-env-epimook.yml: YAML file for conda ML/NLP environment
 
 src/notebooks	
- 
-* Epigenetics-Answer-Classifier.ipynb
 
-* load_json.py
+* load_json.py: processes data in json format into python lists for input into spaCy and TFlearn (Epigenetics-Answer-Classifier.ipynb)
 
+* output_csv.py: processes data in json format into human-interpretable csv file of answers and scores
+
+* Epigenetics-Answer-Classifier.ipynb: spaCy and TFlearn python notebook for vectorization and neural network analysis
 
 
 

@@ -1,0 +1,13 @@
+{
+"label":{
+        "Q1":[average_score_i: score averaged by number of evaluators for a certain submittor's 
+              answer for Q1],
+        "Q2":[...],
+        ...
+    }
+"BOW":{
+        "Q1":[{bow_i: answer bag of words dict that corresponds to the order of label list}],
+        "Q2":[...],
+        ...
+    }
+}

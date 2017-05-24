@@ -1,0 +1,21 @@
+The command line usage:
+    preprocess.py -a <string_address> -o <string_address> -t <string_address> [-b <True or False> -r <int>]
+The specification of every parameter:
+    -a:         the JSON file address of raw data extracted from submissions
+    -o:         the output JSON file address of preprocessed data
+    -t          the output JSON file address of total BOW for every questions
+    -b(option): if need bigram feature
+    -r(option): the number of threshold(< this para) for removing all the features that rarely happen in the input data
+
+Example of Usage: 
+python preprocess.py -a '/Users/ksun/Desktop/syd/syd/FInal_project/raw_json_data2.json' -o '/Users/ksun/Desktop/syd/syd/FInal_project/processed_bow_bi2.json' -t '/Users/ksun/Desktop/syd/syd/FInal_project/processed_total_bi2.json' -b True -r 5
+
+Script Function:
+1.get preprocessed data in the form where you can find from readme_processedBOW_data_structure and write to the address defined by you
+2.get total BOW data and write to the address defined by you
+3.choose if need bigram feature in BOW representation by parameter "-a"
+4.define a number that filter the rare word feature to avoid too sparse data and overfitting in some machine learning algorithm
+
+Improvement Space:
+1. Un-encapsulated script code
+2. problem caused by max_match and the utilization of biolemmatizer need resort to could computing
