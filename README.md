@@ -16,28 +16,24 @@ put installation info here
 ## Dependencies
 * python 3+
 
-** sys
+* sys
 
-** json
+* json
 
-** html.parser
+* html.parser
 
-** pandas
+* pandas
 
-** numpy
+* numpy
 
-** tensorflow
+* tensorflow
 
-** tflearn
+* tflearn
 
-** spacy
+* spacy
 
 # Table of contents:
- 
-doc
 
-* Project notes as of 5/23/17 lunchtime
- 
 resources
 
 * YAML file for conda ML/NLP environment
