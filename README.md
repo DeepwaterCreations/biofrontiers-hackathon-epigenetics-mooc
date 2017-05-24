@@ -36,14 +36,15 @@ put installation info here
 
 resources
 
-* YAML file for conda ML/NLP environment
+* conda-env-epimook.yml: YAML file for conda ML/NLP environment
 
 src/notebooks	
- 
-* Epigenetics-Answer-Classifier.ipynb
 
-* load_json.py
+* load_json.py: processes data in json format into python lists for input into spaCy and TFlearn (Epigenetics-Answer-Classifier.ipynb)
 
+* output_csv.py: processes data in json format into human-interpretable csv file of answers and scores
+
+* Epigenetics-Answer-Classifier.ipynb: spaCy and TFlearn python notebook for vectorization and neural network analysis
 
 
 
