@@ -39,6 +39,7 @@ def output_csv(data):
         for i, item in enumerate(row):
             if not is_int(item) and item != "NULL":
                 item = load_json.remove_garbage(item)
+                item = item.replace('"', '""')
                 row[i] = "\"{0}\"".format(item)
         print(",".join(row))
 
