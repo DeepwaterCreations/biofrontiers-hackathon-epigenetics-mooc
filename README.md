@@ -1,4 +1,5 @@
-# Epigenetics MOOC
+# Python pipeline for evaluation of MOOC student answers
+## Biomedical natural language processing (BioNLP) and neural network analysis
 
 Writing assignments in Massive Open Online Courses (MOOCs) don't just provide students with grades: they contain data useful for assessing student learning.
 
@@ -8,6 +9,14 @@ This pipeline extracts each student’s answer and associated scores from the HT
 
 ![pipeline](https://biof-git.colorado.edu/hackathon/epigenetics_mooc/blob/ada932bd749486f035e9f8fce19177d46642ac0b/Epigenetics_MOOC_5_24_17_pipeline.png)
 
+
+# What it does
+
+placeholder
+
+# How it works
+
+placeholder
 
 # Installation
 
