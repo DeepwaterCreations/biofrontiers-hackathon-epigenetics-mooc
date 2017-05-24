@@ -20,11 +20,11 @@ placeholder
 
 ## Required input data
 
-* Student answer and score data in JSON format
+* Student answer and score data in JSON format (start with load_json.py)
 
 OR
 
-* Student answer and score data in HTML format
+* Student answer and score data in HTML format (processing script for HTML data available upon request)
 
 ## Optional input data
 
