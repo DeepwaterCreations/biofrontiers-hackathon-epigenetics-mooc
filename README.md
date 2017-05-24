@@ -16,12 +16,6 @@ put installation info here
 ## Dependencies
 * python 3+
 
-* sys
-
-* json
-
-* html.parser
-
 * pandas
 
 * numpy
@@ -31,6 +25,18 @@ put installation info here
 * tflearn
 
 * spacy
+
+## Required input data
+
+* Student answer and score data in JSON format
+
+OR
+
+* Student answer and score data in HTML format
+
+## Optional input data
+
+* outside vocabulary or word corpus
 
 # Table of contents:
 
