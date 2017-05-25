@@ -1,19 +1,17 @@
-# Python pipeline for evaluation of MOOC student answers
+# Machine Learning pipeline for the evaluation of MOOC student answers
 ## Biomedical natural language processing (BioNLP) and neural network analysis
 
 Writing assignments in Massive Open Online Courses (MOOCs) don't just provide students with grades: they contain data useful for assessing student learning.
 
 This pipeline analyzes the effectiveness of human learning in a highly abstract scientific domain, epigenetics, and is based on data from the Coursera course “Epigenetic Control of Gene Expression” (https://www.coursera.org/learn/epigenetics) by the University of Melbourne.
 
-This pipeline extracts each student’s answer and associated scores from the HTML data from the coursera website for natural language processing and neural network analysis.
+The datas set was extracted from students' answers and associated scores from the HTML data from the coursera website for natural language processing and neural network analysis.
 
 ![pipeline](https://biof-git.colorado.edu/hackathon/epigenetics_mooc/blob/ada932bd749486f035e9f8fce19177d46642ac0b/Epigenetics_MOOC_5_24_17_pipeline.png)
 
 
 ## What it does
-
-This pipeline uses a python script and jupyter notebook to transform student answers and scores into python lists, generate a vocabulary from those answers for Natural Language Processing, transform the answers into vectors for analysis, and use a neural network to correlate answer vector features with scores. The neural network output includes loss, to represent the efficiency of neural network training, and mean-squared-error.
-
+This pipeline uses a Python application, available as a Jupyter notebook, to transform student answers and scores into Python lists, generate a vocabulary from those answers for Natural Language Processing, transform the answers into vectors for analysis. Given a processed answer, the Neural Network predicts the corresponding score.
 ## How it works
 
 This pipeline requires two scripts to run. First, load_json.py loads student answer and score data already in JSON format. The script outputs a python list of sublists, where each sublist is a student's answer to one question followed by the averages of the scores given to that question by the student's reviewers. This script separates the answer and score data for each question into separate lists, removes reviewer comments associated with a student’s answer, cleans up leftover HTML code, and normalizes the scores for each answer and returns scores between 0 and 1 for analysis. 
@@ -36,7 +34,7 @@ OR
 
 # Installation
 
-put installation info here
+It is recommended that you setup an Anaconda environment and install the packages listed in the Dependencies section below.
 
 ## Dependencies
 * python 3+
@@ -60,17 +58,17 @@ resources
 
 src
 
-* get_abstracts.py: Read abstracts from multiple PubMed xml files in parallel. Can be used to generate custom vocabulary and corpora.
+* get_abstracts.py: Read abstracts from multiple xml files in parallel. Can be used to generate custom vocabulary and corpora.
 
 * gen_dummy_data.py: Generates dummy/test data for pipeline tests and optimization.
 
 src/notebooks	
 
-* load_json.py: processes json data from preprocess.py into feature and target lists for input into spaCy and TFlearn (Epigenetics-Answer-Classifier.ipynb)
+* load_json.py: processes data in json format into python lists for input into spaCy and TFlearn (Epigenetics-Answer-Classifier.ipynb)
 
-* output_csv.py: processes json data from preprocess.py into csv file of student ids, answers, and scores
+* output_csv.py: processes data in json format into human-interpretable csv file of answers and scores
 
-* Epigenetics-Answer-Classifier.ipynb: spaCy and TFlearn python notebook for vectorization and neural network analysis
+* Epigenetics-Answer-Classifier.ipynb: Jupyter/Python notebook that uses TensorFlow/TFLearn and spaCy for Neural Network implementation and Natural Language Processing.
 
 src/preprocess
 
