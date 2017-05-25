@@ -52,7 +52,7 @@ put installation info here
 * spacy
 
 
-# Table of contents:
+# Table of (code) contents:
 
 resources
 
