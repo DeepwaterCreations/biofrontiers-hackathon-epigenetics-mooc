@@ -60,15 +60,15 @@ resources
 
 src
 
-* get_abstracts.py: Read abstracts from multiple xml files in parallel. Can be used to generate custom vocabulary and corpora.
+* get_abstracts.py: Read abstracts from multiple PubMed xml files in parallel. Can be used to generate custom vocabulary and corpora.
 
 * gen_dummy_data.py: Generates dummy/test data for pipeline tests and optimization.
 
 src/notebooks	
 
-* load_json.py: processes data in json format into python lists for input into spaCy and TFlearn (Epigenetics-Answer-Classifier.ipynb)
+* load_json.py: processes json data from preprocess.py into feature and target lists for input into spaCy and TFlearn (Epigenetics-Answer-Classifier.ipynb)
 
-* output_csv.py: processes data in json format into human-interpretable csv file of answers and scores
+* output_csv.py: processes json data from preprocess.py into csv file of student ids, answers, and scores
 
 * Epigenetics-Answer-Classifier.ipynb: spaCy and TFlearn python notebook for vectorization and neural network analysis
 
